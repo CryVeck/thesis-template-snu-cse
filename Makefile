@@ -2,7 +2,7 @@
 
 BIB := thesis.bib
 MAIN_TEX := thesis.tex
-SUB_TEX := 01-intro.tex 02-background.tex 03-your-paper-1.tex 04-your-paper-2.tex xx-conclusion.tex yy-acknowledgements.tex zz-korean-summary.tex snutocstyle.tex
+SUB_TEX := snutocstyle.tex $(wildcard subparts/*.tex) 
 TARGET := thesis.pdf
 
 all: target $(addprefix target/,$(TARGET))
