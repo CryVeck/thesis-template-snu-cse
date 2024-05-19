@@ -360,7 +360,9 @@
 
 %% 학문 (단, 학사는 공학으로 고정)
 \def\academicko#1{\gdef\@snu@academic@ko{#1}}
+\def\academicen#1{\gdef\@snu@academic@en{#1}}
 \def\@snu@academic@ko{공학}
+\def\@snu@academic@en{Engineering}
 
 %% 대학
 \def\schoolko#1{\gdef\@snu@school@ko{#1}}
@@ -381,7 +383,7 @@
 \def\departmentko#1{\gdef\@snu@department@ko{#1}}
 \def\departmenten#1{\gdef\@snu@department@en{#1}}
 \def\@snu@department@ko{컴퓨터 공학부}
-\def\@snu@department@en{DEPARTMENT OF COMPUTER SCIENCE AND\\%
+\def\@snu@department@en{COMPUTER SCIENCE AND\\%
 	ENGINEERING}
 %\@onlypreamble{\departmentko}
 %\@onlypreamble{\departmenten}
@@ -407,33 +409,63 @@
 %\@onlypreamble{\advisor}
 
 %% 학위 수여일 - 표자에 들어감
-\def\graddate#1{\gdef\@snu@graddate{#1}}
-\def\@snu@graddate{\@latex@error{No \noexpand\graddate given}\@ehc}
+\def\graddate#1#2{
+	\gdef\@snu@graddate@en{#1}
+	\gdef\@snu@graddate@kr{#1}
+}
+\def\@snu@graddate@en{\@latex@error{No \noexpand\graddate given}\@ehc}
+\def\@snu@graddate@kr{\@latex@error{No \noexpand\graddate given}\@ehc}
 %\@onlypreamble{\graddate}
 
 %% 논문 제출일 - 인준지에 들어감 (학사 제외)
-\def\submissiondate#1{\gdef\@snu@submissiondate{#1}}
-\def\@snu@submissiondate{\@latex@error{No \noexpand\submissiondate given}\@ehc}
+\def\submissiondate#1#2{
+	\gdef\@snu@submissiondate@en{#1}
+	\gdef\@snu@submissiondate@kr{#2}
+}
+\def\@snu@submissiondate@en{\@latex@error{No \noexpand\submissiondate given}\@ehc}
+\def\@snu@submissiondate@kr{\@latex@error{No \noexpand\submissiondate given}\@ehc}
 %\@onlypreamble{\submissiondate}
 
 %% 논문 인준일 - 인준지에 들어감
-\def\approvaldate#1{\gdef\@snu@approvaldate{#1}}
-\def\@snu@approvaldate{\@latex@error{No \noexpand\approvaldate given}\@ehc}
+\def\approvaldate#1#2{
+	\gdef\@snu@approvaldate@en{#1}
+	\gdef\@snu@approvaldate@kr{#2}
+}
+\def\@snu@approvaldate@en{\@latex@error{No \noexpand\approvaldate given}\@ehc}
+\def\@snu@approvaldate@kr{\@latex@error{No \noexpand\approvaldate given}\@ehc}
 %\@onlypreamble{\approvaldate}
 
 %% 위원장, 부위원장, 위원
-\def\committeemembers#1#2#3#4#5{%
-	\gdef\@snu@committeememberA{#1}
-	\gdef\@snu@committeememberB{#2}
-	\gdef\@snu@committeememberC{#3}
-	\gdef\@snu@committeememberD{#4}
-	\gdef\@snu@committeememberE{#5}
+\def\committeemembersA#1#2{
+	\gdef\@snu@committeememberA@en{#1}
+	\gdef\@snu@committeememberA@kr{#2}
 }
-\def\@snu@committeememberA{}
-\def\@snu@committeememberB{}
-\def\@snu@committeememberC{}
-\def\@snu@committeememberD{}
-\def\@snu@committeememberE{}
+\def\committeemembersB#1#2{
+	\gdef\@snu@committeememberB@en{#1}
+	\gdef\@snu@committeememberB@kr{#2}
+}
+\def\committeemembersC#1#2{
+	\gdef\@snu@committeememberC@en{#1}
+	\gdef\@snu@committeememberC@kr{#2}
+}
+\def\committeemembersD#1#2{
+	\gdef\@snu@committeememberD@en{#1}
+	\gdef\@snu@committeememberD@kr{#2}
+}
+\def\committeemembersE#1#2{
+	\gdef\@snu@committeememberE@en{#1}
+	\gdef\@snu@committeememberE@kr{#2}
+}
+\def\@snu@committeememberA@en{}
+\def\@snu@committeememberA@kr{}
+\def\@snu@committeememberB@en{}
+\def\@snu@committeememberB@kr{}
+\def\@snu@committeememberC@en{}
+\def\@snu@committeememberC@kr{}
+\def\@snu@committeememberD@en{}
+\def\@snu@committeememberD@kr{}
+\def\@snu@committeememberE@en{}
+\def\@snu@committeememberE@kr{}
 
 %% 연락처
 \def\phonenumber#1{\gdef\@snu@phonenumber{#1}}
@@ -479,7 +511,7 @@
 			\@title\\
 			\vfill
 			\fontsize{16pt}{16pt}\selectfont
-			\@snu@graddate\\
+			\@snu@graddate@kr\\
 			\vspace{4cm}\nointerlineskip
 			\@snu@school@ko\\
 			\vspace{1cm}\nointerlineskip
@@ -510,7 +542,7 @@
 			\fi
 			\vfill
 			\fontsize{14pt}{14pt}\selectfont
-			\@snu@graddate\\
+			\@snu@graddate@en\\
 			\vspace{4cm}\nointerlineskip
 			\if@snu@ko
 				\fontsize{16pt}{16pt}\selectfont
@@ -523,7 +555,7 @@
 				\@authoralt
 			\else
 				\fontsize{14pt}{14pt}\selectfont
-				\@snu@department@en\\
+				DEPARTMENT OF \@snu@department@en\\
 				\@snu@school@en\\
 				\@snu@school@ensub \\
 				\vspace{1cm}\nointerlineskip
@@ -591,6 +623,98 @@
 			\@title\\
 			\vspace{1cm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
+			\@advisor\\
+			\vspace{1cm}\nointerlineskip
+			Submitting a master's thesis of Engineering\\
+			%\@snu@submissiondate\\
+			\vspace{5cm}\nointerlineskip
+			\@snu@school\\
+			\vspace{1cm}\nointerlineskip
+			\@snu@department\\
+			\vspace{0.5cm}\nointerlineskip
+			\@author\\
+			\vfill
+			Confirming the master's thesis written by \@author\\
+			\vspace{1cm}\nointerlineskip
+			\@snu@approvaldate@en\\
+			\vspace{1cm}\nointerlineskip
+			지~도~교~수~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(인)
+		\else % 대학원
+			\if@snu@ko
+				\fontsize{22pt}{22pt}\selectfont
+			\else
+				\fontsize{16pt}{16pt}\selectfont
+			\fi
+			\@title\\
+			\vspace{1cm}\nointerlineskip
+			\fontsize{16pt}{16pt}\selectfont
+			\@titlealt\\
+			\vspace{1cm}\nointerlineskip
+			\fontsize{14pt}{14pt}\selectfont
+			Academic advisor \@advisor\\
+			\vspace{5mm}\nointerlineskip
+			\fontsize{16pt}{16pt}\selectfont
+			Submitting an \@snu@msphd{master's thesis}{doctoral dissertation}  of \@snu@academic@en\\
+			\vspace{5mm}\nointerlineskip
+			\fontsize{14pt}{14pt}\selectfont
+			\@snu@submissiondate@en\\
+			\vspace{1cm}\nointerlineskip
+			\fontsize{16pt}{16pt}\selectfont
+			Graduate School of \@snu@academic@en\\
+			\vspace{5mm}\nointerlineskip
+			\@snu@school@ensub\\
+			\vspace{5mm}\nointerlineskip
+			\fontsize{14pt}{14pt}\selectfont
+			\@snu@department@en~MAJOR\\
+			
+			\vspace{5mm}\nointerlineskip
+			\fontsize{16pt}{16pt}\selectfont
+			\@author\\
+			\vspace{1cm}\nointerlineskip
+			Confirming the \@snu@msphd{master's thesis}{doctoral dissertation}  written by \@author\\
+			\vspace{5mm}\nointerlineskip
+			\fontsize{14pt}{14pt}\selectfont
+			\@snu@approvaldate@en\\
+			\vfill
+			\begin{tabular}[b]{cc}
+			Chair & \committeestyle{\@snu@committeememberA@en} (Seal)\\
+			Vice Chair & \committeestyle{\@snu@committeememberB@en} (Seal)\\
+			Examiner & \committeestyle{\@snu@committeememberC@en} (Seal)\\
+			\if@snu@ms\else
+			Examiner & \committeestyle{\@snu@committeememberD@en} (Seal)\\
+			Examiner & \committeestyle{\@snu@committeememberE@en} (Seal)\\
+			\fi
+			\end{tabular}
+		\fi
+	}
+%	\end{minipage}
+	\newpage
+	\if@restonecol \twocolumn \fi
+%% 참고사항
+%% center enviornment를 사용하면 하단 여백이 안 맞음.
+%% 여백 설정이 조금만 어긋나면 페이지가 인쇄되지 않음.
+%% minipage와 parbox 중 무엇이 더 나은지 테스트 중.
+}
+
+\newcommand{\makeapprovalkr}{%
+	\cleardoublepage
+	\if@twocolumn \@restonecoltrue
+	\else \@restonecolfalse \fi
+	\onecolumn
+	%\enlargethispage{15mm}
+	\enlargethispage{10mm} % modified at version 0.99
+	\thispagestyle{empty}
+	\noindent
+%	\begin{minipage}[][\textheight][s]{\textwidth}
+	\parbox[][\@snu@approvaltextheight][s]{\textwidth}{%
+		\centering
+		\normalfont
+		\linespread{1.3}\selectfont
+		\if@snu@under % 학부
+			\fontsize{21pt}{21pt}\selectfont
+			\@title\\
+			\vspace{1cm}\nointerlineskip
+			\fontsize{16pt}{16pt}\selectfont
 			지도교수~\@advisoralt\\
 			\vspace{1cm}\nointerlineskip
 			이~논문을~공학~학사학위~논문으로~제출함\\
@@ -604,7 +728,7 @@
 			\vfill
 			\@author~의~학사~학위~논문을~인준함\\
 			\vspace{1cm}\nointerlineskip
-			\@snu@approvaldate\\
+			\@snu@approvaldate@kr\\
 			\vspace{1cm}\nointerlineskip
 			지~도~교~수~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~(인)
 		\else % 대학원
@@ -627,7 +751,7 @@
 			학위논문으로 제출함\\
 			\vspace{5mm}\nointerlineskip
 			\fontsize{14pt}{14pt}\selectfont
-			\@snu@submissiondate\\
+			\@snu@submissiondate@kr\\
 			\vspace{1cm}\nointerlineskip
 			\fontsize{16pt}{16pt}\selectfont
 			\@snu@school@ko\\
@@ -643,15 +767,15 @@
 			학위논문을 인준함\\
 			\vspace{5mm}\nointerlineskip
 			\fontsize{14pt}{14pt}\selectfont
-			\@snu@approvaldate\\
+			\@snu@approvaldate@kr\\
 			\vfill
 			\begin{tabular}[b]{cc}
-			위 \hfill 원 \hfill 장 & \committeestyle{\@snu@committeememberA} (인)\\
-			부위원장               & \committeestyle{\@snu@committeememberB} (인)\\
-			위 \hfill 원           & \committeestyle{\@snu@committeememberC} (인)\\
+			위 \hfill 원 \hfill 장 & \committeestyle{\@snu@committeememberA@kr} (인)\\
+			부위원장               & \committeestyle{\@snu@committeememberB@kr} (인)\\
+			위 \hfill 원           & \committeestyle{\@snu@committeememberC@kr} (인)\\
 			\if@snu@ms\else
-			위 \hfill 원           & \committeestyle{\@snu@committeememberD} (인)\\
-			위 \hfill 원           & \committeestyle{\@snu@committeememberE} (인)\\
+			위 \hfill 원           & \committeestyle{\@snu@committeememberD@kr} (인)\\
+			위 \hfill 원           & \committeestyle{\@snu@committeememberE@kr} (인)\\
 			\fi
 			\end{tabular}
 		\fi
